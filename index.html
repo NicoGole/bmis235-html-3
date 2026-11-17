@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <!--
-  Author: YOUR NAME
+  Author: Nico Golesis
   GU username: YOUR-GU-USERNAME
   Course: BMIS 235 - HTML-3
 -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="author" content="YOUR NAME">
+<meta name="author" content="Nico Golesis">
 <title>Home</title>
 
 <!-- this one line connects the page to the stylesheet -->
@@ -15,16 +15,14 @@
 </head>
 <body>
 
-<!-- ===== MENU: the same four image links on every page ===== -->
-
- <nav>
+<!-- ===== MENU: the same image links on every page ===== -->
+<nav>
     <a href="index.html"><img src="img/home.png" alt="Home"></a>
     <a href="page1.html"><img src="img/page1.png" alt="Mogneuss"></a>
     <a href="page2.html"><img src="img/page2.png" alt="Cassian"></a>
     <a href="page3.html"><img src="img/page3.png" alt="Feitan"></a>
     <a href="page4.html"><img src="img/page4.png" alt="Musa"></a>
 </nav>
-
 
 <h1>The Phantom Troupe</h1>
 <p class="subtitle">A Dungeons &amp; Dragons campaign against the Dragonborn cult</p>
@@ -41,13 +39,350 @@
     <li><strong>Musa</strong>: a star druid and the happy heart of the troupe.</li>
 </ul>
 
+<!-- ===== SHOWCASE: the interactive journey map from Part 7 ===== -->
 <div class="showcase">
-<!-- ===== HTML: the journey map ... ===== -->
-...all the map code...
+<!-- ===== HTML: the journey map (a drawn map, the trail, and an info box) ===== -->
+<div class="pt-journey">
+  <div class="pt-title">The Road So Far</div>
+  <div class="pt-hint">Follow the footsteps. Tap a stop to see what happened there.</div>
+  <svg class="pt-map" viewBox="0 0 600 340" role="img" aria-label="Map of the places the Phantom Troupe has traveled">
+    <defs>
+      <radialGradient id="ptGlow">
+        <stop offset="0%" stop-color="#f0cf7a" stop-opacity="0.9"/>
+        <stop offset="100%" stop-color="#f0cf7a" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="ptMoonGlow">
+        <stop offset="0%" stop-color="#b9a6e8" stop-opacity="0.55"/>
+        <stop offset="100%" stop-color="#b9a6e8" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <rect x="4" y="4" width="592" height="332" rx="14" class="pt-land"/>
+    <g class="pt-scenery"></g>
+    <path class="pt-trail"/>
+    <path class="pt-future"/>
+    <g class="pt-steps"></g>
+    <g class="pt-stops"></g>
+  </svg>
+  <div class="pt-info">
+    <div class="pt-info-name">The Phantom Troupe</div>
+    <div class="pt-info-text">Watch the troupe's footsteps travel across the map.</div>
+  </div>
+  <div class="pt-controls">
+    <button class="pt-btn pt-prev" type="button">&#9664; Back</button>
+    <button class="pt-btn pt-replay" type="button">Walk it again</button>
+    <button class="pt-btn pt-next" type="button">Next &#9654;</button>
+  </div>
+</div>
+
+<!-- ===== CSS: colors, glow and animations, all kept inside .showcase ===== -->
+<style>
+.showcase .pt-journey { max-width: 680px; margin: 24px auto 0; padding: 10px 14px; border: 1px solid rgba(201,162,74,0.45); border-radius: 14px; background: rgba(255,255,255,0.03); box-shadow: 0 0 30px rgba(130,90,200,0.18); font-family: "Cormorant Garamond", Georgia, serif; color: #e8dfc8; text-align: center; box-sizing: border-box; }
+.showcase .pt-title { font-family: "Cinzel", Georgia, serif; font-size: 22px; font-weight: 700; letter-spacing: 2px; color: #f0cf7a; }
+.showcase .pt-hint { font-size: 15px; font-style: italic; color: #b9a6e8; margin: 2px 0 8px; }
+.showcase .pt-map { width: 100%; height: auto; max-height: 270px; display: block; }
+.showcase .pt-land { fill: #161c27; stroke: #c9a24a; stroke-width: 2; }
+.showcase .pt-sea { fill: #10243a; }
+.showcase .pt-wave { fill: none; stroke: #3d6a91; stroke-width: 1; opacity: 0.6; }
+.showcase .pt-shore { fill: none; stroke: #c9a24a; stroke-width: 1; opacity: 0.35; }
+.showcase .pt-river { fill: none; stroke: #2c4d6e; stroke-width: 6; stroke-linecap: round; }
+.showcase .pt-lake { fill: #1b3654; stroke: #2c4d6e; stroke-width: 2; }
+.showcase .pt-road { fill: none; stroke: #3a3328; stroke-width: 3; stroke-linecap: round; opacity: 0.8; }
+.showcase .pt-bridge { stroke: #8a6a3a; stroke-width: 3; }
+.showcase .pt-tree { fill: #1f3b2d; }
+.showcase .pt-tree.pt-blossom { fill: #6d4a8a; }
+.showcase .pt-dead { fill: none; stroke: #4a4040; stroke-width: 1.4; stroke-linecap: round; }
+.showcase .pt-mtn { fill: #262b38; stroke: #4a4f60; stroke-width: 1; }
+.showcase .pt-snow { fill: #8a8fa0; }
+.showcase .pt-bld { fill: #2e2a26; stroke: #6b5b44; stroke-width: 1; }
+.showcase .pt-roof { fill: #5a2f2a; }
+.showcase .pt-win { fill: #f0cf7a; }
+.showcase .pt-dark { fill: #1c1a1a; stroke: #4a4040; stroke-width: 1; }
+.showcase .pt-flag { fill: #a3322a; }
+.showcase .pt-pole { stroke: #8a8296; stroke-width: 1; }
+.showcase .pt-ghost { fill: #9fe0d0; opacity: 0.6; }
+.showcase .pt-moon-glow { fill: url(#ptMoonGlow); }
+.showcase .pt-moon-tree { fill: #b9a6e8; }
+.showcase .pt-trunk { fill: #5a4630; }
+.showcase .pt-arena { fill: #3a2f22; stroke: #c9a24a; stroke-width: 1.5; }
+.showcase .pt-sand { fill: #a8865a; }
+.showcase .pt-dragon { fill: #6a1f1f; opacity: 0.85; }
+.showcase .pt-ship { fill: #5a4630; }
+.showcase .pt-sail { fill: #d8cfb8; }
+.showcase .pt-region { fill: #8a8296; font-family: "Cinzel", Georgia, serif; font-size: 10px; letter-spacing: 3px; opacity: 0.55; text-anchor: middle; }
+.showcase .pt-compass circle { fill: #161c27; stroke: #c9a24a; stroke-width: 1.5; }
+.showcase .pt-compass path { fill: #c9a24a; }
+.showcase .pt-compass text { fill: #c9a24a; font-family: "Cinzel", Georgia, serif; font-size: 10px; text-anchor: middle; }
+.showcase .pt-trail { fill: none; stroke: rgba(201,162,74,0.22); stroke-width: 2; stroke-dasharray: 3 6; }
+.showcase .pt-future { fill: none; stroke: #b9a6e8; stroke-width: 2; stroke-dasharray: 2 7; stroke-linecap: round; opacity: 0; transition: opacity 0.8s; }
+.showcase .pt-future.pt-on { opacity: 0.8; animation: ptMarch 1.2s linear infinite; }
+@keyframes ptMarch { to { stroke-dashoffset: -18; } }
+.showcase .pt-step { fill: #e8dfc8; opacity: 0; transition: opacity 0.4s; }
+.showcase .pt-step.pt-on { opacity: 0.9; }
+.showcase .pt-stop { cursor: pointer; }
+.showcase .pt-stop .pt-halo { fill: url(#ptGlow); opacity: 0; transition: opacity 0.5s; }
+.showcase .pt-stop .pt-dot { fill: #2a2f3d; stroke: #6b6258; stroke-width: 2; transition: fill 0.4s, stroke 0.4s; }
+.showcase .pt-stop .pt-num { fill: #8a8296; font-family: "Cinzel", Georgia, serif; font-size: 10px; font-weight: 700; text-anchor: middle; pointer-events: none; }
+.showcase .pt-stop .pt-label { fill: #a59bb2; font-family: "Cinzel", Georgia, serif; font-size: 11px; font-weight: 700; text-anchor: middle; pointer-events: none; transition: fill 0.4s; paint-order: stroke; stroke: #0b0d13; stroke-width: 3px; }
+.showcase .pt-stop.pt-visited .pt-dot { fill: #c9a24a; stroke: #f0cf7a; }
+.showcase .pt-stop.pt-visited .pt-num { fill: #0b0d13; }
+.showcase .pt-stop.pt-visited .pt-label { fill: #e8dfc8; }
+.showcase .pt-stop.pt-visited .pt-halo { opacity: 0.3; }
+.showcase .pt-stop.pt-next .pt-dot { fill: #2a2140; stroke: #b9a6e8; stroke-dasharray: 3 2; }
+.showcase .pt-stop.pt-next .pt-num { fill: #b9a6e8; }
+.showcase .pt-stop.pt-next .pt-label { fill: #b9a6e8; }
+.showcase .pt-stop.pt-active .pt-halo { opacity: 1; animation: ptPulse 1.6s ease-in-out infinite; }
+.showcase .pt-stop.pt-active .pt-dot { fill: #b9a6e8; stroke: #ffffff; }
+.showcase .pt-stop.pt-active .pt-num { fill: #0b0d13; }
+.showcase .pt-stop.pt-active .pt-label { fill: #f0cf7a; }
+@keyframes ptPulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+.showcase .pt-info { min-height: 64px; margin-top: 6px; padding: 6px 12px; border-top: 1px solid rgba(201,162,74,0.3); }
+.showcase .pt-info-name { font-family: "Cinzel", Georgia, serif; font-size: 18px; color: #e3bd62; letter-spacing: 1px; }
+.showcase .pt-info-text { font-size: 17px; line-height: 1.4; margin-top: 4px; }
+.showcase .pt-controls { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+.showcase .pt-btn { font-family: "Cinzel", Georgia, serif; font-size: 13px; letter-spacing: 1px; color: #f0cf7a; background: #1f3b2d; border: 1px solid #c9a24a; border-radius: 6px; padding: 7px 14px; cursor: pointer; transition: box-shadow 0.2s, transform 0.2s; }
+.showcase .pt-btn:hover { box-shadow: 0 0 14px rgba(232,196,104,0.7); transform: translateY(-2px); }
+@media (max-width: 600px) {
+  .showcase .pt-stop .pt-label { font-size: 14px; }
+  .showcase .pt-info-text { font-size: 16px; }
+}
+</style>
+
+<!-- ===== JavaScript: draws the map, walks the footsteps, and handles clicks ===== -->
+<script>
+(function () {
+  var root = document.querySelector(".showcase .pt-journey");
+  if (!root) { return; }
+  var NS = "http://www.w3.org/2000/svg";
+  var svg = root.querySelector(".pt-map");
+  var art = svg.querySelector(".pt-scenery");
+
+  // every place we have been, in order. The last one is where we are headed next.
+  var stops = [
+    { name: "The Tavern", x: 62, y: 262, ly: 24, text: "Where it all began. Mogneuss and Bjorn talked in secret, Feitan listened from the wall, and Musa spilled his drink all over himself." },
+    { name: "Cult Prison", x: 115, y: 150, ly: -15, text: "We broke into a Dragonborn cult prison and freed Cassian, but lost Bjorn to Jameis and his flying spikes." },
+    { name: "Haunted Castle", x: 210, y: 70, ly: -16, text: "A hidden throne room in an abandoned castle, and a banshee who did not want visitors." },
+    { name: "Cult Town", x: 250, y: 205, ly: 24, text: "Dinner, two bottles of wine, and a 36 gold healing potion that was really worth 36 silver." },
+    { name: "Burned Forest", x: 340, y: 110, ly: -16, text: "Our Halloween night. Charred hands grabbed Feitan while a burned warrior watched from the ruined mansion." },
+    { name: "Moon Hallow", x: 395, y: 222, ly: -15, text: "Musa's hometown. Uncle Worm's newspaper, a spy mission in the refugee camp, a screaming banshee bow, and Beatrice at W.R." },
+    { name: "The Colosseum", x: 448, y: 282, ly: 24, text: "Inside Moon Hallow, the Festival of the Moon. A bloody arena battle, Cassian's final blow on Razehar, and the Elder Dragon watching from the stands." },
+    { name: "Dragon Cove", x: 530, y: 92, ly: -16, next: true, text: "Our next destination. The troupe is setting out for the Dragon Cove. Who knows what is waiting for us there..." }
+  ];
+
+  function el(tag, attrs, parent) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) { e.setAttribute(k, attrs[k]); }
+    (parent || art).appendChild(e);
+    return e;
+  }
+  function label(x, y, words) { var t = el("text", { x: x, y: y, "class": "pt-region" }); t.textContent = words; }
+
+  // ---- the sea, coastline and waves on the right side ----
+  el("path", { d: "M470 4 C480 40 505 55 495 90 C487 120 520 140 512 175 C505 205 540 225 532 260 C526 290 560 310 556 336 L592 336 Q596 336 596 332 L596 8 Q596 4 592 4 Z", "class": "pt-sea" });
+  el("path", { d: "M470 4 C480 40 505 55 495 90 C487 120 520 140 512 175 C505 205 540 225 532 260 C526 290 560 310 556 336", "class": "pt-shore" });
+  for (var w = 0; w < 14; w++) {
+    var wx = 540 + (w % 3) * 16 + (w % 2) * 6, wy = 30 + w * 22;
+    el("path", { d: "M" + wx + " " + wy + " q4 -4 8 0 q4 4 8 0", "class": "pt-wave" });
+  }
+  // a little ship and a dragon circling the cove
+  el("path", { d: "M556 214 L578 214 L572 222 L561 222 Z", "class": "pt-ship" });
+  el("path", { d: "M566 213 L566 196 L576 211 Z", "class": "pt-sail" });
+  el("path", { d: "M548 46 q8 -10 16 -4 q6 -14 18 -10 q-8 4 -10 12 q10 0 14 8 q-10 -2 -16 2 q-4 6 -12 4 q-6 -2 -10 -12 Z", "class": "pt-dragon" });
+  label(560, 300, "THE SEA");
+
+  // ---- rivers, a lake, roads and a bridge ----
+  el("path", { d: "M150 4 C160 50 120 80 160 110 S200 170 170 220 S190 300 230 336", "class": "pt-river" });
+  el("path", { d: "M470 160 C440 175 430 190 420 205", "class": "pt-river" });
+  el("ellipse", { cx: 455, cy: 155, rx: 22, ry: 12, "class": "pt-lake" });
+  el("path", { d: "M62 262 C100 250 150 240 190 230 S240 210 250 205 S320 190 360 210 S400 225 395 222", "class": "pt-road" });
+  el("line", { x1: 172, y1: 226, x2: 186, y2: 232, "class": "pt-bridge" });
+
+  // ---- mountains with snowy peaks behind the castle ----
+  [[170,52,40],[198,34,44],[232,40,40],[262,58,34],[60,40,36],[90,30,40]].forEach(function (m) {
+    var x = m[0], y = m[1], h = m[2];
+    el("path", { d: "M" + (x - h / 2) + " " + (y + 30) + " L" + x + " " + (y - 8) + " L" + (x + h / 2) + " " + (y + 30) + " Z", "class": "pt-mtn" });
+    el("path", { d: "M" + (x - 6) + " " + (y) + " L" + x + " " + (y - 8) + " L" + (x + 6) + " " + y + " Z", "class": "pt-snow" });
+  });
+
+  // ---- green forests in the west, blossom trees around Moon Hallow ----
+  function tree(x, y, cls) { el("path", { d: "M" + x + " " + (y - 13) + " L" + (x + 6) + " " + y + " L" + (x - 6) + " " + y + " Z", "class": cls }); }
+  [[22,190],[36,205],[24,222],[96,200],[110,215],[84,215],[40,120],[56,108],[30,300],[48,318],[96,310],[120,296],[300,300],[318,312],[286,318],[200,280],[214,296]].forEach(function (t) { tree(t[0], t[1], "pt-tree"); });
+  [[365,250],[378,262],[420,255],[432,240],[370,195],[384,186],[470,240],[418,300],[400,312]].forEach(function (t) { tree(t[0], t[1], "pt-tree pt-blossom"); });
+
+  // ---- the dead, burned forest: bare trunks and branches ----
+  [[300,96],[312,128],[326,84],[356,82],[370,120],[384,96],[318,140],[360,146],[392,130]].forEach(function (t) {
+    var x = t[0], y = t[1];
+    el("path", { d: "M" + x + " " + y + " l0 -16 M" + x + " " + (y - 9) + " l-5 -5 M" + x + " " + (y - 12) + " l5 -6", "class": "pt-dead" });
+  });
+
+  // ---- landmarks for each place ----
+  // the tavern: a cozy house with lit windows
+  el("rect", { x: 34, y: 236, width: 20, height: 14, "class": "pt-bld" });
+  el("path", { d: "M31 237 L44 226 L57 237 Z", "class": "pt-roof" });
+  el("rect", { x: 38, y: 240, width: 4, height: 4, "class": "pt-win" });
+  el("rect", { x: 46, y: 240, width: 4, height: 4, "class": "pt-win" });
+  // the cult prison: a stone block with barred windows and a red flag
+  el("rect", { x: 128, y: 154, width: 30, height: 18, "class": "pt-bld" });
+  for (var b = 0; b < 4; b++) { el("line", { x1: 133 + b * 6, y1: 158, x2: 133 + b * 6, y2: 166, "class": "pt-pole" }); }
+  el("line", { x1: 155, y1: 154, x2: 155, y2: 140, "class": "pt-pole" });
+  el("path", { d: "M155 140 L164 143 L155 146 Z", "class": "pt-flag" });
+  // the haunted castle: towers and a ghostly glow
+  el("rect", { x: 222, y: 70, width: 30, height: 18, "class": "pt-dark" });
+  el("rect", { x: 218, y: 60, width: 9, height: 28, "class": "pt-dark" });
+  el("rect", { x: 247, y: 60, width: 9, height: 28, "class": "pt-dark" });
+  el("path", { d: "M218 60 L222.5 52 L227 60 Z M247 60 L251.5 52 L256 60 Z", "class": "pt-dark" });
+  el("path", { d: "M262 56 q4 -8 8 0 l0 8 l-2 -2 l-2 2 l-2 -2 l-2 2 Z", "class": "pt-ghost" });
+  // the cult town: houses and red cult banners
+  [[226,212],[262,214],[240,226]].forEach(function (h) {
+    el("rect", { x: h[0], y: h[1], width: 14, height: 10, "class": "pt-bld" });
+    el("path", { d: "M" + (h[0] - 2) + " " + (h[1] + 1) + " L" + (h[0] + 7) + " " + (h[1] - 7) + " L" + (h[0] + 16) + " " + (h[1] + 1) + " Z", "class": "pt-roof" });
+  });
+  el("line", { x1: 280, y1: 224, x2: 280, y2: 204, "class": "pt-pole" });
+  el("path", { d: "M280 204 L290 207 L280 212 Z", "class": "pt-flag" });
+  // the ruined mansion in the burned forest
+  el("rect", { x: 352, y: 104, width: 22, height: 14, "class": "pt-dark" });
+  el("path", { d: "M349 105 L363 94 L377 105 Z", "class": "pt-dark" });
+  el("rect", { x: 357, y: 108, width: 3, height: 4, "class": "pt-ghost" });
+  el("rect", { x: 366, y: 108, width: 3, height: 4, "class": "pt-ghost" });
+  // Moon Hallow: the glowing Moon Tree and little homes
+  el("circle", { cx: 420, cy: 212, r: 30, "class": "pt-moon-glow" });
+  el("rect", { x: 417, y: 204, width: 5, height: 14, "class": "pt-trunk" });
+  el("circle", { cx: 419.5, cy: 198, r: 11, "class": "pt-moon-tree" });
+  [[438,224],[402,240],[446,204]].forEach(function (h) {
+    el("rect", { x: h[0], y: h[1], width: 10, height: 8, "class": "pt-bld" });
+    el("rect", { x: h[0] + 3, y: h[1] + 2, width: 3, height: 3, "class": "pt-win" });
+  });
+  // the colosseum inside Moon Hallow
+  el("ellipse", { cx: 474, cy: 280, rx: 18, ry: 11, "class": "pt-arena" });
+  el("ellipse", { cx: 474, cy: 280, rx: 9, ry: 5, "class": "pt-sand" });
+  // the Dragon Cove: a cliff curling around the water
+  el("path", { d: "M505 104 q10 -26 34 -18 q-4 8 -16 10 q-10 4 -12 14 Z", "class": "pt-mtn" });
+
+  // region names
+  label(90, 90, "NORTHERN PEAKS");
+  label(330, 165, "THE BURNED WOOD");
+  label(255, 255, "DRAGONBORN LANDS");
+  label(420, 325, "MOON HALLOW");
+
+  // compass rose
+  var c = el("g", { "class": "pt-compass", transform: "translate(28 34)" });
+  el("circle", { r: 15 }, c);
+  el("path", { d: "M0 -13 L3.5 0 L0 13 L-3.5 0 Z M-13 0 L0 -2.5 L13 0 L0 2.5 Z" }, c);
+  var n = el("text", { y: -18 }, c); n.textContent = "N";
+
+  // ---- the trail: a smooth curve through every visited stop ----
+  var visited = stops.filter(function (s) { return !s.next; });
+  var d = "M" + visited[0].x + " " + visited[0].y;
+  for (var i = 1; i < visited.length; i++) {
+    var a = visited[i - 1], z = visited[i];
+    d += " Q" + ((a.x + z.x) / 2) + " " + ((a.y + z.y) / 2 + (i % 2 ? -26 : 26)) + " " + z.x + " " + z.y;
+  }
+  var trail = svg.querySelector(".pt-trail");
+  trail.setAttribute("d", d);
+  var total = trail.getTotalLength();
+
+  // the dotted road ahead to the Dragon Cove
+  var last = visited[visited.length - 1], goal = stops[stops.length - 1];
+  var future = svg.querySelector(".pt-future");
+  future.setAttribute("d", "M" + last.x + " " + last.y + " C505 260 470 170 " + goal.x + " " + goal.y);
+
+  // how far along the trail each visited stop is
+  visited.forEach(function (s) {
+    var best = 0, bestDist = Infinity;
+    for (var L = 0; L <= total; L += 2) {
+      var p = trail.getPointAtLength(L), dx = p.x - s.x, dy = p.y - s.y, dist = dx * dx + dy * dy;
+      if (dist < bestDist) { bestDist = dist; best = L; }
+    }
+    s.at = best;
+  });
+
+  // ---- footprints: left and right prints along the trail ----
+  var stepsGroup = svg.querySelector(".pt-steps");
+  var prints = [];
+  for (var L = 8, k = 0; L < total - 4; L += 12, k++) {
+    var p1 = trail.getPointAtLength(L), p2 = trail.getPointAtLength(Math.min(L + 1, total));
+    var ang = Math.atan2(p2.y - p1.y, p2.x - p1.x) * 180 / Math.PI;
+    var g = el("g", { transform: "translate(" + p1.x + " " + p1.y + ") rotate(" + ang + ") translate(0 " + (k % 2 ? 3.5 : -3.5) + ")" }, stepsGroup);
+    el("ellipse", { cx: 0, cy: 0, rx: 3.2, ry: 1.9, "class": "pt-step" }, g);
+    el("circle", { cx: 4.3, cy: 0, r: 1.2, "class": "pt-step" }, g);
+    prints.push({ at: L, parts: g.querySelectorAll(".pt-step") });
+  }
+
+  // ---- the clickable stops ----
+  var stopsGroup = svg.querySelector(".pt-stops");
+  stops.forEach(function (s, idx) {
+    var g = el("g", { "class": "pt-stop" + (s.next ? " pt-next" : ""), tabindex: "0", role: "button", "aria-label": s.name }, stopsGroup);
+    el("circle", { cx: s.x, cy: s.y, r: 22, "class": "pt-halo" }, g);
+    el("circle", { cx: s.x, cy: s.y, r: 9, "class": "pt-dot" }, g);
+    var num = el("text", { x: s.x, y: s.y + 3.5, "class": "pt-num" }, g); num.textContent = s.next ? "?" : idx + 1;
+    var lab = el("text", { x: s.x, y: s.y + s.ly, "class": "pt-label" }, g); lab.textContent = s.name;
+    function pick() { stopWalk(); show(idx, true); }
+    g.addEventListener("click", pick);
+    g.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(); } });
+    s.node = g;
+  });
+
+  var nameBox = root.querySelector(".pt-info-name");
+  var textBox = root.querySelector(".pt-info-text");
+  var current = -1;
+
+  // show one stop's story in the info box
+  function show(idx, revealAll) {
+    current = idx;
+    var s = stops[idx];
+    stops.forEach(function (t, j) {
+      t.node.classList.toggle("pt-active", j === idx);
+      if (revealAll && j <= idx && !t.next) { t.node.classList.add("pt-visited"); }
+    });
+    if (revealAll) {
+      setProgress(s.next ? total + 10 : s.at + 6);
+      future.classList.toggle("pt-on", !!s.next);
+    }
+    nameBox.textContent = s.next ? "Next Stop: " + s.name : (idx + 1) + ". " + s.name;
+    textBox.textContent = s.text;
+  }
+
+  // light up every footprint up to a distance along the trail
+  function setProgress(len) {
+    prints.forEach(function (p) {
+      for (var q = 0; q < p.parts.length; q++) { p.parts[q].classList.toggle("pt-on", p.at <= len); }
+    });
+  }
+
+  // the walking animation: footprints appear one by one from stop to stop
+  var timer = null;
+  function stopWalk() { if (timer) { cancelAnimationFrame(timer); timer = null; } }
+  function walk() {
+    stopWalk();
+    stops.forEach(function (t) { t.node.classList.remove("pt-visited", "pt-active"); });
+    future.classList.remove("pt-on");
+    setProgress(-1);
+    var start = null, speed = 0.075, reached = -1;
+    function frame(time) {
+      if (start === null) { start = time; }
+      var len = (time - start) * speed;
+      setProgress(len);
+      while (reached + 1 < visited.length && visited[reached + 1].at <= len) {
+        reached++;
+        visited[reached].node.classList.add("pt-visited");
+        show(reached, false);
+      }
+      if (len < total + 10) { timer = requestAnimationFrame(frame); }
+      else { timer = null; future.classList.add("pt-on"); show(stops.length - 1, false); }
+    }
+    timer = requestAnimationFrame(frame);
+  }
+
+  root.querySelector(".pt-replay").addEventListener("click", walk);
+  root.querySelector(".pt-next").addEventListener("click", function () { stopWalk(); show(Math.min(current + 1, stops.length - 1), true); });
+  root.querySelector(".pt-prev").addEventListener("click", function () { stopWalk(); show(Math.max(current - 1, 0), true); });
+
+  walk();
+})();
 </script>
 </div>
 
-<!-- Footer: fill in your name -->
+<!-- Footer -->
 <footer>Nico Golesis &middot; BMIS 235</footer>
+
 </body>
 </html>
