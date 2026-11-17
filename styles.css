@@ -1,59 +1,190 @@
 /* =====================================================================
-   styles.css  ·  YOUR BRAND
+   styles.css  ·  THE PHANTOM TROUPE
    ---------------------------------------------------------------------
-   This one file is your brand guide. Every page that links to it gets
-   the same font, the same colors and the same spacing.
-   Change a color here once, and every page changes.
-
-   Use the same font and colors you picked for your Excel menu images,
-   so the menu and the pages look like one brand.
+   Brand: a moonlit night in Moon Hallow. Deep midnight background,
+   glowing gold titles, lavender fey magic, and forest green accents.
+   Every page links to this one file, so they all share the same look.
    ===================================================================== */
 
+/* fantasy fonts from Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap");
+
 body {
-    font-family: Georgia, "Times New Roman", serif;
-    background-color: #f4efe6;
-    color: #2b2b2b;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 20px;
+    color: #e8dfc8;
     margin: 0;
-    padding: 0 20px 40px 20px;
+    padding: 0 20px 60px 20px;
+    /* night sky: a lavender glow, a green glow, and deep midnight */
+    background-color: #0b0d13;
+    background-image:
+        radial-gradient(circle at 15% 10%, rgba(130, 90, 200, 0.25), transparent 40%),
+        radial-gradient(circle at 85% 30%, rgba(40, 120, 90, 0.22), transparent 45%),
+        radial-gradient(circle at 50% 100%, rgba(201, 162, 74, 0.12), transparent 50%);
+    background-attachment: fixed;
 }
 
-/* the menu at the top of every page */
+/* the menu sticks to the top of the screen as you scroll */
 nav {
-    background-color: #2b5d8c;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    margin: 0 -20px;
     padding: 14px;
     text-align: center;
+    background-color: rgba(11, 13, 19, 0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 2px solid #c9a24a;
+    box-shadow: 0 6px 30px rgba(201, 162, 74, 0.25);
 }
 
-/* every image inside the menu is forced to the same height.
-   If your images still look different sizes, their WIDTHS are
-   different: go back to Excel and make every cell the same size. */
-nav img {
-    height: 50px;
-    margin: 4px;
-    vertical-align: middle;
-}
-
-/* no underline or border around the image links */
 nav a {
     text-decoration: none;
 }
 
+nav img {
+    height: 50px;
+    margin: 4px;
+    vertical-align: middle;
+    border-radius: 6px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* buttons lift and glow gold when you hover over them */
+nav img:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 18px rgba(232, 196, 104, 0.8);
+}
+
+/* big glowing gold title */
 h1 {
-    color: #2b5d8c;
+    font-family: "Cinzel", Georgia, serif;
+    font-weight: 900;
+    font-size: 56px;
+    letter-spacing: 3px;
     text-align: center;
-    font-size: 40px;
+    margin: 50px 0 0 0;
+    color: #f0cf7a;
+    text-shadow: 0 0 20px rgba(240, 207, 122, 0.55), 0 0 45px rgba(201, 162, 74, 0.3);
+    animation: glow 4s ease-in-out infinite;
+}
+
+/* the title slowly pulses like magic */
+@keyframes glow {
+    0%, 100% { text-shadow: 0 0 20px rgba(240, 207, 122, 0.5), 0 0 45px rgba(201, 162, 74, 0.25); }
+    50%      { text-shadow: 0 0 32px rgba(240, 207, 122, 0.9), 0 0 70px rgba(201, 162, 74, 0.5); }
+}
+
+/* the short line under each page title */
+.subtitle {
+    text-align: center;
+    font-style: italic;
+    font-size: 22px;
+    color: #b9a6e8;
+    letter-spacing: 1px;
+    margin-top: 10px;
+}
+
+h2 {
+    font-family: "Cinzel", Georgia, serif;
+    font-weight: 700;
+    font-size: 26px;
+    letter-spacing: 2px;
+    color: #e3bd62;
+    max-width: 680px;
+    margin: 50px auto 0 auto;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(201, 162, 74, 0.5);
+}
+
+/* a little diamond before every section heading */
+h2::before {
+    content: "\25C6  ";
+    color: #b9a6e8;
+    font-size: 18px;
 }
 
 p {
-    max-width: 600px;
-    margin: 20px auto;
-    font-size: 18px;
-    line-height: 1.5;
+    max-width: 680px;
+    margin: 18px auto;
+    line-height: 1.6;
+}
+
+ul {
+    max-width: 640px;
+    margin: 18px auto;
+    line-height: 1.7;
+}
+
+li::marker {
+    color: #c9a24a;
+}
+
+strong {
+    color: #f0cf7a;
+    font-weight: 600;
+}
+
+/* photos with a gold frame and a soft glow */
+.photo {
+    display: block;
+    width: 100%;
+    max-width: 680px;
+    margin: 28px auto 8px auto;
+    border: 2px solid #c9a24a;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(201, 162, 74, 0.3);
+}
+
+.caption {
+    text-align: center;
+    font-style: italic;
+    font-size: 17px;
+    color: #9a90a8;
+    margin-top: 0;
+}
+
+/* glowing glass cards, used for the party or any special section */
+.card {
+    max-width: 680px;
+    margin: 30px auto;
+    padding: 8px 26px 14px 26px;
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(201, 162, 74, 0.4);
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(130, 90, 200, 0.15);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 35px rgba(185, 166, 232, 0.35);
+}
+
+.card h2 {
+    margin-top: 18px;
+    border-bottom: none;
+}
+
+/* a grayed out card for fallen friends */
+.memoriam {
+    filter: grayscale(1);
+    opacity: 0.75;
 }
 
 footer {
     text-align: center;
+    font-family: "Cinzel", Georgia, serif;
     font-size: 14px;
-    color: #777777;
-    margin-top: 40px;
+    letter-spacing: 2px;
+    color: #8a8296;
+    margin-top: 70px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(201, 162, 74, 0.25);
+}
+
+/* on phones, shrink the big title so it fits */
+@media (max-width: 600px) {
+    h1 { font-size: 38px; }
+    nav img { height: 40px; }
 }
