@@ -172,6 +172,77 @@ strong {
     opacity: 0.75;
 }
 
+/* ===== STAT BOX: a mini character sheet on each character page ===== */
+.stats {
+    max-width: 680px;
+    margin: 30px auto;
+    padding: 18px;
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(201, 162, 74, 0.5);
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(130, 90, 200, 0.15);
+}
+
+/* each row of boxes sits side by side and wraps on small screens */
+.stat-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.stat-row:last-child {
+    margin-bottom: 0;
+}
+
+/* one small box, like Level or Armor Class */
+.stat {
+    flex: 1;
+    min-width: 90px;
+    padding: 10px 6px;
+    text-align: center;
+    background-color: rgba(11, 13, 19, 0.6);
+    border: 1px solid rgba(201, 162, 74, 0.35);
+    border-radius: 10px;
+}
+
+/* the big number in the box */
+.stat-value {
+    display: block;
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: #f0cf7a;
+    text-shadow: 0 0 12px rgba(240, 207, 122, 0.4);
+}
+
+/* the small name under the number */
+.stat-label {
+    display: block;
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #b9a6e8;
+    text-transform: uppercase;
+}
+
+/* the ability score boxes are a little smaller */
+.ability {
+    min-width: 80px;
+}
+
+.ability .stat-value {
+    font-size: 24px;
+}
+
+/* the +3 style modifier under each ability score */
+.mod {
+    display: block;
+    font-size: 16px;
+    color: #e8dfc8;
+}
+
 footer {
     text-align: center;
     font-family: "Cinzel", Georgia, serif;
