@@ -331,7 +331,7 @@
     var s = stops[idx];
     stops.forEach(function (t, j) {
       t.node.classList.toggle("pt-active", j === idx);
-      if (revealAll && j <= idx && !t.next) { t.node.classList.add("pt-visited"); }
+      if (revealAll) { t.node.classList.toggle("pt-visited", j <= idx && !t.next); }
     });
     if (revealAll) {
       setProgress(s.next ? total + 10 : s.at + 6);
@@ -372,9 +372,11 @@
     timer = requestAnimationFrame(frame);
   }
 
-  root.querySelector(".pt-replay").addEventListener("click", walk);
-  root.querySelector(".pt-next").addEventListener("click", function () { stopWalk(); show(Math.min(current + 1, stops.length - 1), true); });
-  root.querySelector(".pt-prev").addEventListener("click", function () { stopWalk(); show(Math.max(current - 1, 0), true); });
+  root.querySelector("button.pt-replay").addEventListener("click", walk);
+  // the buttons (looked up as "button" so the Dragon Cove stop, which also has the pt-next class, is not grabbed by mistake)
+  // Next and Back loop around: Next on the last stop goes back to the first
+  root.querySelector("button.pt-next").addEventListener("click", function () { stopWalk(); show((current + 1) % stops.length, true); });
+  root.querySelector("button.pt-prev").addEventListener("click", function () { stopWalk(); show((current - 1 + stops.length) % stops.length, true); });
 
   walk();
 })();
