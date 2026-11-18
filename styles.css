@@ -300,12 +300,13 @@ h2 {
     text-shadow: 0 0 14px rgba(240, 207, 122, 0.45);
 }
 
-/* ===== NEW STYLE 5: character photos zoom and glow on hover ===== */
-.photo {
-    transition: transform 0.3s, box-shadow 0.3s;
+/* ===== NEW STYLE 5: stat boxes glow gold when you hover over them ===== */
+.stat {
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
 
-.photo:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0 40px rgba(185, 166, 232, 0.6);
+.stat:hover {
+    transform: translateY(-3px);
+    border-color: #f0cf7a;
+    box-shadow: 0 0 18px rgba(240, 207, 122, 0.55);
 }
