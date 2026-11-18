@@ -259,3 +259,43 @@ footer {
     h1 { font-size: 38px; }
     nav img { height: 40px; }
 }
+
+/* ===== NEW STYLE 1: the current page's menu button glows gold ===== */
+nav a.current img {
+    box-shadow: 0 0 0 2px #f0cf7a, 0 0 20px rgba(240, 207, 122, 0.85);
+}
+
+/* ===== NEW STYLE 2: a big signature quote for each character ===== */
+.quote {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 16px 24px;
+    text-align: center;
+    font-style: italic;
+    font-size: 26px;
+    line-height: 1.4;
+    color: #f0cf7a;
+    border-left: 3px solid #b9a6e8;
+    border-right: 3px solid #b9a6e8;
+    background-color: rgba(185, 166, 232, 0.08);
+    border-radius: 8px;
+}
+
+/* ===== NEW STYLE 3: links glow lavender and turn gold on hover ===== */
+.links a {
+    color: #b9a6e8;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px dashed #b9a6e8;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.links a:hover {
+    color: #f0cf7a;
+    border-bottom-color: #f0cf7a;
+}
+
+/* ===== NEW STYLE 4: section headings glow softly gold ===== */
+h2 {
+    text-shadow: 0 0 14px rgba(240, 207, 122, 0.45);
+}
